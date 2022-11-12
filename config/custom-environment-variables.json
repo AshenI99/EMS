@@ -1,0 +1,4 @@
+{
+  "jwtPrivateKey" : "ems_jwtPrivateKey",
+  "db": "ems_db"
+}
