@@ -5,6 +5,7 @@ require("express-async-errors");
 
 module.exports = function () {
 
+    console.log(config)
     winston.add(new winston.transports.MongoDB({ db: config.get('db'), level: "info" }));
     winston.add(new winston.transports.File({ filename: 'logs/example.log' }));
     winston.add(
