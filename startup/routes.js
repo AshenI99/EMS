@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 
 const admins = require("../routes/admins");
 const exams = require("../routes/exams");
@@ -11,6 +12,7 @@ const error = require("../middlewares/error");
 
 module.exports = function (app) {
     app.use(express.json());
+    app.use(cors());
 
     app.use("/api/admins", admins);
     app.use("/api/students", students);
