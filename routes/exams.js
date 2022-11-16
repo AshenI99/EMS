@@ -30,7 +30,7 @@ router.put('/:id', [auth, admin, validateObjectId], async (req, res)=>{
     if(error) return res.status(400).send(error.details[0].message);
 
     const savingExam = {
-        ..._.pick(req.body, ["name", "venue", "dateTime", "closingDate"]),
+        ..._.pick(req.body, ["name", "venue", "dateTime", "closingDate", "description"]),
     };
 
     const savedExam = await Exam.findByIdAndUpdate(req.params.id, savingExam, { new: true });
