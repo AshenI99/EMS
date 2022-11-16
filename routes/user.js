@@ -1,6 +1,8 @@
 const _ = require("lodash");
 const express= require("express");
+const moment = require("moment");
 const router = express.Router();
+
 
 const auth = require("../middlewares/auth");
 const validateObjectId = require("../middlewares/validateObjectId");
@@ -25,7 +27,11 @@ router.get('/registered-exams', [auth], async (req, res)=>{
 
 router.get('/exam-results', [auth], async (req, res)=>{
     let inputDate = new Date();
-    let results = await StudentExam.find({ studentId: req.user._id }).populate("studentId").populate("examId").then((stExms) => stExms.dateTime < inputDate )
+    let results = await StudentExam.find({ studentId: req.user._id })
+        .populate("studentId").populate("examId")
+        .then((stExms) => {
+            return stExms.filter((stExm) => moment().diff(stExm.dateTime, 'days') < 1)
+        })
     if(!results) results = [];
 
     res.send(results);
