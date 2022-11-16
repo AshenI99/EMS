@@ -25,7 +25,7 @@ router.get('/registered-exams', [auth], async (req, res)=>{
 
 router.get('/exam-results', [auth], async (req, res)=>{
     let inputDate = new Date();
-    let results = await StudentExam.find({ studentId: req.user._id, examId: {dateTime: { $lte: inputDate }} }).populate("studentId").populate("examId");
+    let results = await StudentExam.find({ studentId: req.user._id }).populate("studentId").populate("examId").then((stExms) => stExms.dateTime < inputDate )
     if(!results) results = [];
 
     res.send(results);
