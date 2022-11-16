@@ -8,6 +8,12 @@ const examSchema = new mongoose.Schema({
         minLength: 5,
         maxLength: 200
     },
+    description: {
+        type: String,
+        required: true,
+        minLength: 5,
+        maxLength: 500
+    },
     venue: {
         type: String,
         required: true,
@@ -31,6 +37,11 @@ const validateExam=(exam)=>{
         name: Joi.string()
             .min(5)
             .max(200)
+            .required(),
+
+        description: Joi.string()
+            .min(5)
+            .max(500)
             .required(),
 
         venue: Joi.string()
