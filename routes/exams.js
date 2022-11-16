@@ -18,7 +18,7 @@ router.post('/', [auth, admin], async (req, res)=>{
     if(error) return res.status(400).send(error.details[0].message);
 
     const savingExam = new Exam({
-            ..._.pick(req.body, ["name", "venue", "dateTime", "closingDate"]),
+            ..._.pick(req.body, ["name", "venue", "dateTime", "closingDate", "description"]),
         })
     await savingExam.save();
 
