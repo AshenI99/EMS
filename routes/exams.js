@@ -53,8 +53,9 @@ router.get('/:id', validateObjectId, async (req, res)=>{
     res.send(exam);
 });
 
-router.get('/unfinished-exams', [auth, admin], async (req, res)=>{
+router.get('/unfinished/exams', [auth, admin], async (req, res)=>{
     const exam = await Exam.find({ isFinished: false });
+    console.log(exam)
     res.send(exam);
 });
 
