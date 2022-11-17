@@ -53,4 +53,11 @@ router.get('/:id', validateObjectId, async (req, res)=>{
     res.send(exam);
 });
 
+router.get('/unfinished-exams', [auth, admin, validateObjectId], async (req, res)=>{
+    const exam = await Exam.find({ isFinished: false });
+    if(!exam) return res.status(404).send("The exam with the given id is not found");
+
+    res.send(exam);
+});
+
 module.exports = router;

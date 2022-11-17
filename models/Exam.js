@@ -27,6 +27,10 @@ const examSchema = new mongoose.Schema({
     closingDate: {
         type: Date,
         required: true
+    },
+    isFinished: {
+        type: Boolean,
+        default: false
     }
 })
 

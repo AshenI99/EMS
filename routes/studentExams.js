@@ -44,6 +44,8 @@ router.put('/exam/:id', [auth, admin, validateObjectId], async (req, res)=>{
         savedResults.push(studentExam);
     }
 
+    await Exam.findByIdAndUpdate(req.params.id, { isFinished: true });
+
     res.send(savedResults);
 });
 
