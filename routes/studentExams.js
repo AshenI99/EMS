@@ -21,7 +21,14 @@ router.get('/exam/:id', [auth, admin, validateObjectId] , async (req, res)=>{
     const studentExams = await StudentExam.find({examId: req.params.id}).populate("studentId");
     if(!studentExams) return res.status(404).send("Students are not registered for the given exam");
 
-    res.send(studentExams);
+    const exam = await Exam.findById(req.params.id);
+
+    let dataObj = {
+        exam: exam,
+        results: studentExams
+    }
+
+    res.send(dataObj);
 });
 
 router.put('/exam/:id', [auth, admin, validateObjectId], async (req, res)=>{
