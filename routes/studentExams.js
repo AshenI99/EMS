@@ -42,7 +42,7 @@ router.put('/exam/:id', [auth, admin, validateObjectId], async (req, res)=>{
     let savedResults = [];
     for(let i=0; i<results.length; i++){
         const studentExam = await StudentExam.findOneAndUpdate(
-            { _id: results[i]._id, studentId: results[i].studentId, examId: req.params.id },
+            { _id: results[i]._id, studentId: results[i].studentId._id, examId: req.params.id },
             { result: results[i].result },
             { new: true }
         );
